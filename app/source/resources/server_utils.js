@@ -1,7 +1,7 @@
 angular.module('server.utils', [])
 
 .factory('main_server', ['$http', function($http){
-    var serverAddress = 'https://transformers-satrack.appspot.com/';
+    var serverAddress = 'https://signopesos.herokuapp.com/';
     var serverPort = '';
 //    var serverAddress = 'http://127.0.0.1';
 //    var serverPort = '8080';
