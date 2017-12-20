@@ -1,0 +1,1 @@
+"use strict";angular.module("formApp.results",[]).controller("results",["main_server","user_data","$location",function(r,s,t){var a=this;a.user_data=s,a.user_data.results||t.path("/form")}]);

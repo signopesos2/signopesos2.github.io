@@ -1,0 +1,24 @@
+
+<div style="background-color: #00b3ee; height: 100px; margin-bottom: 20px;">
+    <label style="padding-left: 90px; padding-top: 10px; font-size: 50px; color: white">
+        Administración del aplicativo
+    </label>
+</div>
+
+<div class="container">
+
+    <h2 style="color: #0089b7; margin-left: -20px">Registros</h2>
+    <br>
+
+    <div class="row">
+        <div class="col-md-3">
+            <a href="{{ ctrl.serverAddress+'getRegistros' }}" download>
+                <button class="btn btn-primary">Descargar registros</button>
+            </a>
+        </div>
+
+        <div class="col-md-2">
+            <button class="btn btn-primary" ng-click="ctrl.delRegistros()">Eliminar registros</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,106 @@
+
+<div class="row align-items-center justify-content-center" ng-show="ctrl.loading"
+     style="height: 100vh; width: 100vw; background-color: white; opacity: 0.9;">
+    <span class="col">
+        Cargando...
+    </span>
+</div>
+
+<div ng-show="!ctrl.loading" style="background-color: #00b3ee; height: 100px; margin-bottom: 20px;">
+    <label style="padding-left: 90px; padding-top: 10px; font-size: 50px; color: white">
+        Solicita tu préstamo al instante
+    </label>
+</div>
+
+<form name="info" class="col-8 offset-1" ng-show="!ctrl.loading">
+
+    <div class="alert alert-danger" role="alert" ng-show="ctrl.userData.results.error_code == 208">
+        Por favor revisa nuevamente los campos.
+    </div>
+    <div class="alert alert-danger" role="alert" ng-show="ctrl.userData.results.error_code == 209">
+        No se encuentra el fondo '{{ctrl.userData.results.nombre_fondo}}' administrado por '{{ctrl.userData.results.administradora}}'.
+    </div>
+
+    <h2 style="color: #0089b7; margin-left: -20px">Información personal</h2>
+    <br>
+
+    <div class="row">
+        <div class="form-group col">
+            <label for="InputName">Nombre</label>
+            <input ng-model="ctrl.userData.data.nombre.text" ng-minlength="3" type="text" class="form-control" id="InputName" aria-describedby="nameHelp" placeholder="Ingrese su nombre">
+            <small id="nameHelp" class="form-text text-muted">
+                {{ctrl.userData.results.nombre.message}}
+            </small>
+        </div>
+        <div class="form-group col">
+            <label for="InputLastName">Apellidos</label>
+            <input ng-model="ctrl.userData.data.apellidos.text" type="text" class="form-control" id="InputLastName" aria-describedby="LastNameHelp" placeholder="Ingrese sus apellidos">
+            <small id="LastNameHelp" class="form-text text-muted">
+                {{ctrl.userData.results.apellidos.message}}
+            </small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-6">
+            <label for="InputId">Cédula</label>
+            <input type="text" ng-model="ctrl.userData.data.cedula.text" class="form-control" id="InputId" aria-describedby="emailHelp" placeholder="Ingrese su número de identificación">
+            <small id="id_number" class="form-text text-muted">
+                {{ctrl.userData.results.cedula.message}}
+            </small>
+        </div>
+        <div class="form-group col-6">
+            <label for="InputId">Celular</label>
+            <input type="text" ng-model="ctrl.userData.data.celular.text" class="form-control" id="InputPhone" aria-describedby="phoneNumber" placeholder="Ingrese su número de celular">
+            <small id="phoneNumber" class="form-text text-muted">
+                {{ctrl.userData.results.celular.message}}
+            </small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-6">
+            <label for="InputEmail">Correo electrónico</label>
+            <input type="text" ng-model="ctrl.userData.data.correo.text" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Ingrese su correo electrónico">
+
+            <small id="emailHelp" class="form-text text-muted">
+                {{ctrl.userData.results.correo.message}}
+            </small>
+        </div>
+    </div>
+
+    <br>
+    <h2 style="color: #0089b7; margin-left: -20px">Información del FIC</h2>
+    <br>
+    <div class="row">
+        <div class="form-group col-12">
+            <label for="InputId">Administradora</label>
+            <input ng-change="ctrl.loadFics(ctrl.userData.data.administradora.text)" type="text" list="adminNames" ng-model="ctrl.userData.data.administradora.text" class="form-control" id="InputAdmin" aria-describedby="admin" placeholder="Ingrese la administradora">
+            <datalist id="adminNames">
+                <option ng-repeat="admin in ctrl.administradoras">{{admin}}</option>
+            </datalist>
+
+            <small id="admin" class="form-text text-muted">
+                {{ctrl.userData.results.administradora.message}}
+            </small>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-12">
+            <label for="InputId">Nombre del fondo</label>
+            <input autocomplete="off"  type="text" list="fundName" ng-model="ctrl.userData.data.nombre_fondo.text" class="form-control" id="InputFund" aria-describedby="fundNameMSG" placeholder="Ingrese el nombre del fondo">
+
+            <datalist id="fundName">
+                <option ng-repeat="fic in ctrl.selectedAdminFics">{{fic}}</option>
+            </datalist>
+            <small id="fundNameMSG" class="form-text text-muted">
+                {{ctrl.userData.results.nombre_fondo.message}}
+            </small>
+        </div>
+    </div>
+
+    <button style="height: 50px; display: block; margin-left: auto; margin-right: auto;" type="submit" class="btn btn-primary" ng-click="ctrl.submit()">
+        Solicitalo ya
+    </button>
+    <br>
+
+</form>
